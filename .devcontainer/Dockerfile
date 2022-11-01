@@ -44,7 +44,10 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && pip --disable-pip-version-check --no-cache-dir install otter-grader \
     && pip --disable-pip-version-check --no-cache-dir install okpy \
     && pip --disable-pip-version-check --no-cache-dir install scikit-learn \
-    && install2.r --error --skipinstalled --ncpus -1 \
+    && rm -rf /tmp/downloaded_packages
+
+# install R packages
+RUN install2.r --error --skipinstalled --ncpus -1 \
         languageserver \
         httpgd \
         statip \
@@ -64,25 +67,24 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         cluster \
         tidymodels \
         markdown \ 
-        ottr \
-    && rm -rf /tmp/downloaded_packages
+        ottr
 
 ## Install summarytools and load some R package off the bat
-RUN R -e "devtools::install_github('https://github.com/dcomtois/summarytools/tree/0-8-9')"
-RUN R -e "library(ottr)"
-RUN R -e "library(here)"
-RUN R -e "library(languageserver)"
+# RUN R -e "devtools::install_github('https://github.com/dcomtois/summarytools/tree/0-8-9')"
+# RUN R -e "library(ottr)"
+# RUN R -e "library(here)"
+# RUN R -e "library(languageserver)"
 # RUN installGithub.r ucbds-infra/ottr@stable
 
 
 # VSCode R Debugger dependency. Install the latest release version from GitHub without using GitHub API.
 # See https://github.com/microsoft/vscode-dev-containers/issues/1032
-RUN export TAG=$(git ls-remote --tags --refs --sort='version:refname' https://github.com/ManuelHentschel/vscDebugger v\* | tail -n 1 | cut --delimiter='/' --fields=3) \
-    && Rscript -e "remotes::install_git('https://github.com/ManuelHentschel/vscDebugger.git', ref = '"${TAG}"', dependencies = FALSE)"
+# RUN export TAG=$(git ls-remote --tags --refs --sort='version:refname' https://github.com/ManuelHentschel/vscDebugger v\* | tail -n 1 | cut --delimiter='/' --fields=3) \
+#     && Rscript -e "remotes::install_git('https://github.com/ManuelHentschel/vscDebugger.git', ref = '"${TAG}"', dependencies = FALSE)"
 
 # R Session watcher settings.
 # See more details: https://github.com/REditorSupport/vscode-R/wiki/R-Session-watcher
-RUN echo 'source(file.path(Sys.getenv("HOME"), ".vscode-R", "init.R"))' >> ${HOME}/.Rprofile
+# RUN echo 'source(file.path(Sys.getenv("HOME"), ".vscode-R", "init.R"))' >> ${HOME}/.Rprofile
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update \
