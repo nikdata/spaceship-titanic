@@ -33,12 +33,12 @@
 	"portsAttributes": {
 		"8787": {
 			"label": "Rstudio",
-			"requireLocalPort": true,
+			// "requireLocalPort": true,
 			"onAutoForward": "ignore"
 		},
 		"8888": {
 			"label": "Jupyter",
-			"requireLocalPort": true,
+			// "requireLocalPort": true,
 			"onAutoForward": "ignore"
 		}
 	},
