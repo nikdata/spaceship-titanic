@@ -1,9 +1,7 @@
 {
-	"name": "R Data Science Environment",
+	"name": "Spaceship Titanic",
 	"build": {
-		"dockerfile": "Dockerfile",
-		// Update VARIANT to pick a specific R version: 4, 4.1, 4.0
-		"args": { "VARIANT": "4" }
+		"dockerfile": "dockerfile"
 	},
 
 	// Set *default* container specific settings.json values on container create.
@@ -29,24 +27,19 @@
 	],
 
 	// Forward Jupyter and RStudio ports
-	"forwardPorts": [8787, 8888],
+	"forwardPorts": [8787],
 	"portsAttributes": {
 		"8787": {
 			"label": "Rstudio",
-			"requireLocalPort": true,
-			"onAutoForward": "ignore"
-		},
-		"8888": {
-			"label": "Jupyter",
 			"requireLocalPort": true,
 			"onAutoForward": "ignore"
 		}
 	},
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "sudo rstudio-server start",
+	"postCreateCommand": "sudo rstudio-server start"
 	// "postCreateCommand": "pip3 install -r requirements.txt",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "rstudio"
+	// "remoteUser": "rstudio"
 }
