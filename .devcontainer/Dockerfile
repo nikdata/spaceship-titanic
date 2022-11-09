@@ -26,6 +26,9 @@ RUN R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
 # create renv cache folder
 RUN mkdir -p /renv/cache
 
+# copy my preferences over
+COPY rstudio-prefs.json /home/rstudio/.config/rstudio/rstudio-prefs.json
+
 # expose the port for RStudio
 EXPOSE 8787
 
