@@ -15,6 +15,46 @@ glimpse(raw_train)
 cln_train <- raw_train %>%
   janitor::clean_names()
 
+# missing values
+cln_train |>
+  map_df(~class(.)) |>
+  pivot_longer(cols = everything(), values_to = 'column_type') |>
+  inner_join(
+    cln_train |>
+      map_df(~sum(is.na(.))) |>
+      pivot_longer(cols = everything(), values_to = 'missing_count')
+    , by = c('name' = 'name')
+  )
+
+cln_train |>
+  select(where(is.numeric)) |>
+  summarize(
+    across(
+      .cols = everything(),
+      .fns = ~ median(.x, na.rm = T)
+    )
+  ) %>%
+  pivot_longer(cols = everything(), values_to = 'median_value')
+
+
+# graph
+
+cln_train %>%
+  ggplot(aes(x = age)) +
+  geom_histogram()
+
+cln_train %>%
+  ggplot(aes(x = room_service)) +
+  geom_histogram()
+
+max(cln_train$room_service, na.rm =T)
+
+
+
+cln_train %>%
+  map_df(~sum(is.na(.))) %>%
+  pivot_longer(cols = everything())
+
 # break cabin up into separate columns
 # syntax is: deck (what deck the cabin is on), num (meaning cabin number), side (port or starboard)
 
@@ -33,6 +73,16 @@ cln_train <- cln_train %>%
     remove = FALSE,
     sep = '_'
   )
+
+cln_train <- cln_train |>
+  mutate(
+    is_minor = ifelse(age < 18, 1, 0),
+    total_spent = room_service + food_court + shopping_mall + spa + vr_deck
+  )
+
+cln_train %>%
+  select(is_numeric) %>%
+  purrr::map_df(sum(is.na(.)))
 
 # how many unique home planets?
 unique(cln_train$home_planet)

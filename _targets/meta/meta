@@ -1,0 +1,10 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+clean_names|function|da29278db2e46064|||||||||||||||
+cln_train|stem|653357b2963339c2|10e835851affe247|9d59e8bf297d2bd4|-1597841448||t19305.8262568676s|250fdf6a871a0c19|235856|rds|local|vector|||0.213||
+create_features|function|b8ad1d752e4a3373|||||||||||||||
+ez_train_dat|stem|346f7310def69bdc|a2c3ceea051bc873|8cfc1538ff3b9b7a|-1217162230||t19305.693852968s|f975625d0e6b9537|189050|rds|local|vector|||0.181||
+get_data|function|2de8dd46388699ee|||||||||||||||
+raw_test|stem|607f6bd7c88bed47|bc9ab5054742da00|c3b5fc02cdc369c1|-1522407167|/workspaces/spaceship-titanic/data/test.csv|t19305.11688228s|a638a394b0469587|372487|file|local|vector|||0.001||
+raw_train|stem|6ccfe29fed25cdde|1fc82ff5be58f8c8|21174c6b588f4efa|-1517550347||t19305.6938501902s|c7f874cd1c82bf7a|188967|rds|local|vector|||0.403||
+test_file|stem|607f6bd7c88bed47|bc9ab5054742da00|c3b5fc02cdc369c1|-803864214|/workspaces/spaceship-titanic/data/test.csv|t19305.11688228s|a638a394b0469587|372487|file|local|vector|||0.001||
+train_file|stem|21307ee96b429247|2131f74d2fc12913|c3b5fc02cdc369c1|-1472120034|/workspaces/spaceship-titanic/data/train.csv|t19305.1168823263s|edf52620b31056df|805421|file|local|vector|||0.622||
