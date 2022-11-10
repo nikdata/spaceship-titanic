@@ -27,6 +27,16 @@ cln_train |>
   )
 
 cln_train |>
+  select(where(is.logical)) %>%
+  filter(is.na(cryo_sleep)) %>%
+  mutate(
+    cryo_sleep2 = ifelse(is.na(cryo_sleep), FALSE, TRUE)
+  )
+
+cln_train |>
+  select(where(is.character))
+
+tmp <- cln_train |>
   select(where(is.numeric)) |>
   summarize(
     across(
@@ -35,6 +45,13 @@ cln_train |>
     )
   ) %>%
   pivot_longer(cols = everything(), values_to = 'median_value')
+
+cln_train %>%
+  select(age) %>%
+  mutate(
+    new_age = ifelse(is.na(age), tmp[tmp$name=='age',][[2]],age)
+  ) %>%
+  filter(is.na(age))
 
 
 # graph

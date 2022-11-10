@@ -10,9 +10,9 @@ tar_option_set(
     "tidyr",
     'here',
     'readr',
-    'janitor'), # packages that your targets need to run
-  format = "rds" # default storage format
-  # Set other options as needed.
+    'janitor'
+  ), 
+  format = "qs"
 )
 
 # tar_make_clustermq() configuration (okay to leave alone):
@@ -44,5 +44,9 @@ list(
   tar_target(
     cln_train,
     create_features(ez_train_dat)
+  ),
+  tar_target(
+    tbl_impute,
+    calc_impute_vals(cln_train)
   )
 )
