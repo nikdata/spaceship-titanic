@@ -12,6 +12,27 @@ source(here('scripts','functions.R'))
 # read in raw data
 raw_train <- read_csv(here('data','train.csv'))
 
+
+# EDA on training
+tbl_missing <- raw_train %>%
+  janitor::clean_names() |> 
+  purrr::map_df(~sum(is.na(.))) |> 
+  tidyr::pivot_longer(
+    cols = everything(),
+    names_to = 'variables',
+    values_to = 'missing_values'
+  )
+
+tbl_class <- raw_train |> 
+  janitor::clean_names() |> 
+  purrr::map_df(~class(.)) |> 
+  tidyr::pivot_longer(
+    cols = everything(),
+    names_to = 'variables',
+    values_to = 'type'
+  )
+
+ 
 # missing values
 raw_train %>%
   map_df(~sum(is.na(.))) |>

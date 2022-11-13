@@ -12,7 +12,7 @@ tar_option_set(
     'readr',
     'janitor'
   ), 
-  format = "qs"
+  format = "rds"
 )
 
 # tar_make_clustermq() configuration (okay to leave alone):
